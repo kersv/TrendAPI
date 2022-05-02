@@ -12,49 +12,47 @@ namespace TrendMovie.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrendController : ControllerBase
+    public class SeriesController : ControllerBase
     {
         private readonly TrendMovieDBContext _context;
 
-        public TrendController(TrendMovieDBContext context)
+        public SeriesController(TrendMovieDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Trend
+        // GET: api/Series
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
+        public async Task<ActionResult<IEnumerable<Series>>> GetSeries()
         {
-            return await _context.Trend.ToListAsync();
+            return await _context.Series.ToListAsync();
         }
 
-       
-
-        // GET: api/Trend/5
+        // GET: api/Series/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trend>> GetTrend(int id)
+        public async Task<ActionResult<Series>> GetSeries(int id)
         {
-            var trend = await _context.Trend.FindAsync(id);
+            var series = await _context.Series.FindAsync(id);
 
-            if (trend == null)
+            if (series == null)
             {
                 return NotFound();
             }
 
-            return trend;
+            return series;
         }
 
-        // PUT: api/Trend/5
+        // PUT: api/Series/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrend(int id, Trend trend)
+        public async Task<IActionResult> PutSeries(int id, Series series)
         {
-            if (id != trend.TrendId)
+            if (id != series.SeriesId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(trend).State = EntityState.Modified;
+            _context.Entry(series).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +60,7 @@ namespace TrendMovie.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TrendExists(id))
+                if (!SeriesExists(id))
                 {
                     return NotFound();
                 }
@@ -75,36 +73,36 @@ namespace TrendMovie.Controllers
             return NoContent();
         }
 
-        // POST: api/Trend
+        // POST: api/Series
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Trend>> PostTrend(Trend trend)
+        public async Task<ActionResult<Series>> PostSeries(Series series)
         {
-            _context.Trend.Add(trend);
+            _context.Series.Add(series);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
+            return CreatedAtAction("GetSeries", new { id = series.SeriesId }, series);
         }
 
-        // DELETE: api/Trend/5
+        // DELETE: api/Series/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrend(int id)
+        public async Task<IActionResult> DeleteSeries(int id)
         {
-            var trend = await _context.Trend.FindAsync(id);
-            if (trend == null)
+            var series = await _context.Series.FindAsync(id);
+            if (series == null)
             {
                 return NotFound();
             }
 
-            _context.Trend.Remove(trend);
+            _context.Series.Remove(series);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TrendExists(int id)
+        private bool SeriesExists(int id)
         {
-            return _context.Trend.Any(e => e.TrendId == id);
+            return _context.Series.Any(e => e.SeriesId == id);
         }
     }
 }

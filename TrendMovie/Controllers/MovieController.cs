@@ -12,49 +12,47 @@ namespace TrendMovie.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrendController : ControllerBase
+    public class MovieController : ControllerBase
     {
         private readonly TrendMovieDBContext _context;
 
-        public TrendController(TrendMovieDBContext context)
+        public MovieController(TrendMovieDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Trend
+        // GET: api/Movie
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
+        public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
         {
-            return await _context.Trend.ToListAsync();
+            return await _context.Movie.ToListAsync();
         }
 
-       
-
-        // GET: api/Trend/5
+        // GET: api/Movie/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trend>> GetTrend(int id)
+        public async Task<ActionResult<Movie>> GetMovie(int id)
         {
-            var trend = await _context.Trend.FindAsync(id);
+            var movie = await _context.Movie.FindAsync(id);
 
-            if (trend == null)
+            if (movie == null)
             {
                 return NotFound();
             }
 
-            return trend;
+            return movie;
         }
 
-        // PUT: api/Trend/5
+        // PUT: api/Movie/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrend(int id, Trend trend)
+        public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
-            if (id != trend.TrendId)
+            if (id != movie.MovieId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(trend).State = EntityState.Modified;
+            _context.Entry(movie).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +60,7 @@ namespace TrendMovie.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TrendExists(id))
+                if (!MovieExists(id))
                 {
                     return NotFound();
                 }
@@ -75,36 +73,36 @@ namespace TrendMovie.Controllers
             return NoContent();
         }
 
-        // POST: api/Trend
+        // POST: api/Movie
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Trend>> PostTrend(Trend trend)
+        public async Task<ActionResult<Movie>> PostMovie(Movie movie)
         {
-            _context.Trend.Add(trend);
+            _context.Movie.Add(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
+            return CreatedAtAction("GetMovie", new { id = movie.MovieId }, movie);
         }
 
-        // DELETE: api/Trend/5
+        // DELETE: api/Movie/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrend(int id)
+        public async Task<IActionResult> DeleteMovie(int id)
         {
-            var trend = await _context.Trend.FindAsync(id);
-            if (trend == null)
+            var movie = await _context.Movie.FindAsync(id);
+            if (movie == null)
             {
                 return NotFound();
             }
 
-            _context.Trend.Remove(trend);
+            _context.Movie.Remove(movie);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TrendExists(int id)
+        private bool MovieExists(int id)
         {
-            return _context.Trend.Any(e => e.TrendId == id);
+            return _context.Movie.Any(e => e.MovieId == id);
         }
     }
 }
