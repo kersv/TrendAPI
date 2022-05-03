@@ -100,6 +100,9 @@ namespace TrendMovie.Controllers
             return NoContent();
         }
 
+
+
+
         private bool MovieExists(int id)
         {
             return _context.Movie.Any(e => e.MovieId == id);
