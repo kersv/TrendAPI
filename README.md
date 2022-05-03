@@ -20,11 +20,15 @@ PUT api/movie/{id}
 POST api/movie
 - This will add an entry to the movie table based on the response body given.
 
-examples request body 
+sample request body
+
 POST api/movie
 ```
 {
     "movieName": "example movie6",
     "movieYear": 2005
 }
+```
+
+PUT api/movie/1
 ```
