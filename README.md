@@ -22,14 +22,6 @@ POST api/movie
 
 sample request body
 
-POST api/movie
-```
-{
-        "movieName": "example movie6",
-        "movieYear": 2005
-}
-```
-
 PUT api/movie/1
 ```
 {
