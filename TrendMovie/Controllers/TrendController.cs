@@ -21,6 +21,43 @@ namespace TrendMovie.Controllers
             _context = context;
         }
 
+        //// GET: api/Trend
+        //[HttpGet]
+        //public async Task<ActionResult<Response>> GetTrend()
+        //{
+
+
+        //    var trend = await _context.Trend.ToListAsync();
+
+        //    var response = new Response();
+
+        //    response.StatusCode = 404;
+        //    response.StatusDescription = "Not Successful";
+
+        //    if (trend != null)
+        //    {
+        //        response.StatusCode = 200;
+        //        response.StatusDescription = "Successful";
+        //        response.Trend = trend;
+        //    }
+
+        //    return response;
+        //}
+
+        //// GET: api/Trend/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Trend>> GetTrend(int id)
+        //{
+        //    var trend = await _context.Trend.Include(t => t.Movie).SingleOrDefaultAsync(t => t.TrendId == id);
+
+        //    if (trend == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return trend;
+        //}
+
         // GET: api/Trend
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
@@ -28,7 +65,7 @@ namespace TrendMovie.Controllers
             return await _context.Trend.ToListAsync();
         }
 
-       
+
 
         // GET: api/Trend/5
         [HttpGet("{id}")]
@@ -86,21 +123,7 @@ namespace TrendMovie.Controllers
             return CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
         }
 
-        // DELETE: api/Trend/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrend(int id)
-        {
-            var trend = await _context.Trend.FindAsync(id);
-            if (trend == null)
-            {
-                return NotFound();
-            }
-
-            _context.Trend.Remove(trend);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
+      
 
         private bool TrendExists(int id)
         {
