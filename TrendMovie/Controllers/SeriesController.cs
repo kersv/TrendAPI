@@ -84,21 +84,7 @@ namespace TrendMovie.Controllers
             return CreatedAtAction("GetSeries", new { id = series.SeriesId }, series);
         }
 
-        // DELETE: api/Series/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSeries(int id)
-        {
-            var series = await _context.Series.FindAsync(id);
-            if (series == null)
-            {
-                return NotFound();
-            }
-
-            _context.Series.Remove(series);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
+        
 
         private bool SeriesExists(int id)
         {

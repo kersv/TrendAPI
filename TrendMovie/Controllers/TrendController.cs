@@ -123,22 +123,7 @@ namespace TrendMovie.Controllers
             return CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
         }
 
-        // DELETE: api/Trend/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrend(int id)
-        {
-            var trend = await _context.Trend.FindAsync(id);
-            if (trend == null)
-            {
-                return NotFound();
-            }
-
-            _context.Trend.Remove(trend);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
+       
 
         private bool TrendExists(int id)
         {
