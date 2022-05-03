@@ -42,4 +42,3 @@ SELECT * FROM Trend;
 SELECT * FROM Movie;
 
 
-
