@@ -25,10 +25,25 @@ sample request body
 POST api/movie
 ```
 {
-    "movieName": "example movie6",
-    "movieYear": 2005
+        "movieName": "example movie6",
+        "movieYear": 2005
 }
 ```
 
 PUT api/movie/1
+```
+{
+        "movieId": 1,
+        "movieName": "updated moviename",
+        "movieYear": 2014
+}
+```
+
+POST api/movie
+```
+{
+        
+        "movieName": "new entry",
+        "movieYear": 2021
+}
 ```
