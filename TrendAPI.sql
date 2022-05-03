@@ -40,5 +40,3 @@ INSERT INTO Trend (Genre, MovieId) VALUES ("Horror", 1);
 
 SELECT * FROM Trend;
 SELECT * FROM Movie;
-
-
