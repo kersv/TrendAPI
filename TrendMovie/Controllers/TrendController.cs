@@ -21,57 +21,34 @@ namespace TrendMovie.Controllers
             _context = context;
         }
 
-        //// GET: api/Trend
-        //[HttpGet]
-        //public async Task<ActionResult<Response>> GetTrend()
-        //{
-
-
-        //    var trend = await _context.Trend.ToListAsync();
-
-        //    var response = new Response();
-
-        //    response.StatusCode = 404;
-        //    response.StatusDescription = "Not Successful";
-
-        //    if (trend != null)
-        //    {
-        //        response.StatusCode = 200;
-        //        response.StatusDescription = "Successful";
-        //        response.Trend = trend;
-        //    }
-
-        //    return response;
-        //}
-
-        //// GET: api/Trend/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Trend>> GetTrend(int id)
-        //{
-        //    var trend = await _context.Trend.Include(t => t.Movie).SingleOrDefaultAsync(t => t.TrendId == id);
-
-        //    if (trend == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return trend;
-        //}
-
         // GET: api/Trend
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
+        public async Task<ActionResult<Response>> GetTrend()
         {
-            return await _context.Trend.ToListAsync();
+
+
+            var trend = await _context.Trend.Include(t => t.Movie).ToListAsync();
+
+            var response = new Response();
+
+            response.StatusCode = 404;
+            response.StatusDescription = "Not Successful";
+
+            if (trend != null)
+            {
+                response.StatusCode = 200;
+                response.StatusDescription = "Successful";
+                response.TrendList = trend;
+            }
+
+            return response;
         }
-
-
 
         // GET: api/Trend/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Trend>> GetTrend(int id)
         {
-            var trend = await _context.Trend.FindAsync(id);
+            var trend = await _context.Trend.Include(t => t.Movie).SingleOrDefaultAsync(t => t.TrendId == id);
 
             if (trend == null)
             {
@@ -80,6 +57,29 @@ namespace TrendMovie.Controllers
 
             return trend;
         }
+
+        //// GET: api/Trend
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
+        //{
+        //    return await _context.Trend.ToListAsync();
+        //}
+
+
+
+        //// GET: api/Trend/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Trend>> GetTrend(int id)
+        //{
+        //    var trend = await _context.Trend.FindAsync(id);
+
+        //    if (trend == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return trend;
+        //}
 
         // PUT: api/Trend/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
