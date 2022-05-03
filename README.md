@@ -10,6 +10,7 @@ Three Endpoints:
 
 There is 3 available HTTP request
 GET, PUT, POST
+
 GET api/trend 
 - This will return all the trendid along with the genre of the movie
 
