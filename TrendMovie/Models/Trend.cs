@@ -7,7 +7,6 @@ namespace TrendMovie.Models
 		public string Genre { get; set; }
 
         //public Movie Movie { get; set; }
-        //public Series Series { get; set; }
     }
 }
 

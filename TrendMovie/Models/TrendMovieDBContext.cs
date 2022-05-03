@@ -22,7 +22,7 @@ namespace TrendMovie.Models
 
 		public DbSet<Trend> Trend { get; set; } = null!;
 		public DbSet<Movie> Movie { get; set; } = null!;
-		public DbSet<Series> Series { get; set; } = null!;
+		
 	}
 }
 
