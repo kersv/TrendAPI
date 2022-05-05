@@ -11,23 +11,26 @@ Three Endpoints:
 There is 3 available HTTP request
 GET, PUT, POST
 
-GET api/trend 
-- This will return all the trendid along with the genre of the movie
+GET (This will return all values within the parameter)
+- api/trend
+- api/trend/{trendId}
+- api/movie
+- api/movie/{movieId}
 
-PUT api/movie/{id}
-- This will updating an existing item based on the movieid given
 
-POST api/movie
-- This will add an entry to the movie table based on the response body given.
+PUT (This will updating an existing item based on the id given within the scope of the constraint, in my case movies >= 2000)
+-api/trend/{trendId}
+-api/movie/{movieId}
+
+POST (This will add an entry to the table based on the response body given)
+- api/trend
 
 sample request body
 
 PUT api/movie/1
 ```
 {
-        "movieId": 1,
-        "movieName": "updated moviename",
-        "movieYear": 2014
+       
 }
 ```
 
@@ -35,7 +38,6 @@ POST api/movie
 ```
 {
         
-        "movieName": "new entry",
-        "movieYear": 2021
+        
 }
 ```
