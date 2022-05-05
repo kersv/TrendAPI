@@ -1,7 +1,6 @@
 # TrendAPI
-This is an API for movie and series that are trending.
+This is an API for movies that are trending.
 This API has 2 tables: Trend and Movie. 
-This is one-to-many relationship.
 
 Three Endpoints:
 - api/trend
