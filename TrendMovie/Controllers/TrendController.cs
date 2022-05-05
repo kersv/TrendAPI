@@ -46,49 +46,41 @@ namespace TrendMovie.Controllers
 
         // GET: api/Trend/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trend>> GetTrend(int id)
+        public async Task<ActionResult<Response>> GetTrend(int id)
         {
             var trend = await _context.Trend.Include(t => t.Movie).SingleOrDefaultAsync(t => t.TrendId == id);
 
+            var response = new Response();
+
+            response.StatusCode = 200;
+            response.StatusDescription = "Successful";
+            response.TrendList.Add(trend);
+
             if (trend == null)
             {
-                return NotFound();
+                response.StatusCode = 400;
+                response.StatusDescription = "Not Successful";
+                
             }
 
-            return trend;
+            return response;
         }
 
-        //// GET: api/Trend
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Trend>>> GetTrend()
-        //{
-        //    return await _context.Trend.ToListAsync();
-        //}
-
-
-
-        //// GET: api/Trend/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Trend>> GetTrend(int id)
-        //{
-        //    var trend = await _context.Trend.FindAsync(id);
-
-        //    if (trend == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return trend;
-        //}
+        
 
         // PUT: api/Trend/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTrend(int id, Trend trend)
         {
+            var response = new Response();
+
             if (id != trend.TrendId)
             {
-                return BadRequest();
+                response.StatusCode = 400;
+                response.StatusDescription = "Not Successful";
+
+                return Ok(response);
             }
 
             _context.Entry(trend).State = EntityState.Modified;
@@ -96,31 +88,55 @@ namespace TrendMovie.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+
+                response.StatusCode = 200;
+                response.StatusDescription = "Successful";
+                
+
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!TrendExists(id))
                 {
-                    return NotFound();
+                    response.StatusCode = 400;
+                    response.StatusDescription = "Not Successful";
+
+                    return Ok(response);
                 }
                 else
                 {
+                    response.StatusCode = 400;
+                    response.StatusDescription = "Not Successful";
                     throw;
                 }
             }
 
-            return NoContent();
+            return Ok(response);
         }
 
         // POST: api/Trend
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Trend>> PostTrend(Trend trend)
+        public async Task<ActionResult<Response>> PostTrend(Trend trend)
         {
             _context.Trend.Add(trend);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
+            var addTrend = CreatedAtAction("GetTrend", new { id = trend.TrendId }, trend);
+            var response = new Response();
+            response.StatusCode = 400;
+            response.StatusDescription = "Not Successful";
+
+            if (addTrend != null)
+            {
+                
+
+                response.StatusCode = 200;
+                response.StatusDescription = "Successful";
+                response.TrendList.Add(trend);
+            }
+
+            return response;
         }
 
        
