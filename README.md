@@ -19,8 +19,8 @@ GET (This will return all values within the parameter)
 
 
 PUT (This will updating an existing item based on the id given within the scope of the constraint, in my case movies >= 2000)
--api/trend/{trendId}
--api/movie/{movieId}
+- api/trend/{trendId}
+- api/movie/{movieId}
 
 POST (This will add an entry to the table based on the response body given)
 - api/trend
