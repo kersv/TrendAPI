@@ -66,7 +66,7 @@ namespace TrendMovie.Controllers
             return response;
         }
 
-        
+
 
         // PUT: api/Trend/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -75,8 +75,10 @@ namespace TrendMovie.Controllers
         {
             var response = new Response();
 
+
             if (id != trend.TrendId)
             {
+
                 response.StatusCode = 400;
                 response.StatusDescription = "Not Successful";
 
@@ -88,11 +90,9 @@ namespace TrendMovie.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-
                 response.StatusCode = 200;
                 response.StatusDescription = "Successful";
-                
-
+                response.TrendList.Add(trend);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -113,6 +113,7 @@ namespace TrendMovie.Controllers
 
             return Ok(response);
         }
+
 
         // POST: api/Trend
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
