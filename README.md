@@ -25,19 +25,42 @@ PUT (This will updating an existing item based on the id given within the scope 
 POST (This will add an entry to the table based on the response body given)
 - api/trend
 
-sample request body
+GET Response Example
 
+GET api/trend/1
+```
+{
+       "statusCode": 200,
+       "statusDescription": "Successful",
+       "trendList": [
+        {
+              "trendId": 1,
+              "genre": "Thriller",
+              "movie": {
+                  "movieId": 1,
+                  "movieName": "Squid Game",
+                  "movieYear": 2021
+              }
+           }
+        ]
+}
+```
+
+PUT Request Example
 PUT api/movie/1
 ```
 {
-       
+       "movieId": 1,
+       "movieName": "Squid Game season 2",
+       "movieYear": 2025
 }
+      
 ```
 
-POST api/movie
+
+POST Request Example
+POST api/trend
 ```
-{
-        
-        
-}
+
+
 ```
