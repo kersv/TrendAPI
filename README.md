@@ -1,6 +1,7 @@
 # TrendAPI
 This is an API for movies that are trending.
-This API has 2 tables: Trend and Movie. 
+This API has 2 tables: Trend and Movie.
+Install the necessary NuGet packages.
 
 Four Endpoints:
 - api/trend
@@ -47,6 +48,7 @@ GET api/trend/1
 ```
 
 PUT Request Example
+
 PUT api/movie/1
 ```
 {
@@ -59,8 +61,15 @@ PUT api/movie/1
 
 
 POST Request Example
+
 POST api/trend
 ```
-
+{
+       "genre": "Action",
+       "movie": {
+              "movieName": "Memory",
+              "movieYear": 2022
+       }
+}
 
 ```
