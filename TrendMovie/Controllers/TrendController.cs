@@ -130,7 +130,7 @@ namespace TrendMovie.Controllers
 
             if (addTrend != null)
             {
-                
+
 
                 response.StatusCode = 200;
                 response.StatusDescription = "Successful";
@@ -140,7 +140,7 @@ namespace TrendMovie.Controllers
             return response;
         }
 
-       
+
 
         private bool TrendExists(int id)
         {

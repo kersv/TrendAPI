@@ -76,34 +76,27 @@ namespace TrendMovie.Controllers
             }
 
             _context.Entry(movie).State = EntityState.Modified;
-
-            try
+            while (true)
             {
-                await _context.SaveChangesAsync();
-                response.StatusCode = 200;
-                response.StatusDescription = "Successful";
-                response.MovieList.Add(movie);
-
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MovieExists(id))
+                try
                 {
-                    response.StatusCode = 400;
-                    response.StatusDescription = "Not Successful";
-
+                    await _context.SaveChangesAsync();
+                    response.StatusCode = 200;
+                    response.StatusDescription = "Successful";
+                    response.MovieList.Add(movie);
                     return Ok(response);
 
                 }
-                else
+                catch (Exception)
                 {
                     response.StatusCode = 400;
-                    response.StatusDescription = "Not Successful";
-                    throw;
+                    response.StatusDescription = "Not Successful - Movie Year >= 2000 ONLY";
+                    return Ok(response);
                 }
             }
+            
 
-            return Ok(response);
+            
         }
 
         private bool MovieExists(int id)
